@@ -3,7 +3,7 @@ package com.teach.tdd;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.List;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 import org.junit.jupiter.api.Test;
@@ -20,12 +20,16 @@ import org.springframework.http.ResponseEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teach.tdd.models.Employee;
+import com.teach.tdd.services.EmployeeService;
 
 @SpringBootTest(classes = TddApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class EmployeeControllerIT {
 
 	@Autowired
 	TestRestTemplate restTemplate;
+	
+	@Autowired
+	EmployeeService employeeService;
 
 	@LocalServerPort
 	int port;
@@ -34,9 +38,12 @@ public class EmployeeControllerIT {
 
 	@Test
 	public void testEmployees() {
-		ResponseEntity<List> response = restTemplate.getForEntity(host.get() + "/employees", List.class);
+		
+		ResponseEntity<String> response = restTemplate.getForEntity(host.get() + "/employees", String.class);
 
 		assertEquals(200, response.getStatusCode().value());
+		
+		System.out.println(response.getBody());
 
 	}
 	

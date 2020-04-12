@@ -24,7 +24,7 @@ public class Employee implements Serializable {
 	@Column(name = "first_name")
 	private String firstName;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="dept_id")
 	private Department dept;
 

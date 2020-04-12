@@ -1,5 +1,6 @@
 package com.teach.tdd.models;
 
+import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
 
@@ -12,7 +13,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @JsonIgnoreProperties
-public class Department {
+public class Department implements Serializable {
+
+	private static final long serialVersionUID = -5513081016056479452L;
 
 	@Id
 	private UUID id;
